@@ -159,17 +159,13 @@ const FIRE = String.fromCodePoint(0x1F525);
 const WAVE = String.fromCodePoint(0x1F44B);
 const STAR = String.fromCodePoint(0x2B50);
 
-function AnimatedNumber({
-  target,
-  duration = 2000,
-}: {
-  target: number;
-  duration?: number;
-}) {
+function AnimatedNumber({ target, duration = 2000 }) {
   const [current, setCurrent] = useState(0);
+
   useEffect(() => {
     let start = 0;
     const increment = target / (duration / 16);
+
     const timer = setInterval(() => {
       start += increment;
       if (start >= target) {
@@ -179,8 +175,10 @@ function AnimatedNumber({
         setCurrent(Math.floor(start));
       }
     }, 16);
+
     return () => clearInterval(timer);
   }, [target, duration]);
+
   return <>{current.toLocaleString()}</>;
 }
 
